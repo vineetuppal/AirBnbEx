@@ -53,7 +53,7 @@ public class HotelServiceImpl implements HotelService{
                 .orElseThrow(() -> new ResourceNotFoundException("Hotel not found with ID: "+id));
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(user.equals(hotel.getOwner())){
+        if(!user.equals(hotel.getOwner())){
             throw new UnAuthorisedException("This user doesn't own this hotel with id: "+id);
         }
 
